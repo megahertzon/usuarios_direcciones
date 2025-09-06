@@ -1,4 +1,4 @@
-package com.example.usuarios_direcciones
+package com.nelsonr.usuarios_direcciones
 
 import io.flutter.embedding.android.FlutterActivity
 
