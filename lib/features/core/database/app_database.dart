@@ -9,6 +9,8 @@ import 'package:usuarios_direcciones/features/shared/domain/data/dao/user_dao.da
 import 'package:usuarios_direcciones/features/shared/domain/data/models/address_model.dart';
 import 'package:usuarios_direcciones/features/shared/domain/data/models/user_model.dart';
 
+part 'app_database.g.dart';
+
 @Database(version: 1, entities: [UserModel, AddressModel])
 abstract class AppDatabase extends FloorDatabase {
   UserDao get userDao;
