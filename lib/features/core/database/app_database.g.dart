@@ -102,6 +102,9 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `addresses` (`id` INTEGER, `userId` INTEGER NOT NULL, `street` TEXT NOT NULL, `city` TEXT NOT NULL, `country` TEXT NOT NULL, FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE, PRIMARY KEY (`id`))');
 
+        await database.execute(
+            'CREATE VIEW IF NOT EXISTS `user_with_count` AS   SELECT u.id, u.firstName, u.lastName,\n         COUNT(a.id) AS addressCount\n  FROM users u\n  LEFT JOIN addresses a ON a.userId = u.id\n  GROUP BY u.id\n');
+
         await callback?.onCreate?.call(database, version);
       },
     );
@@ -179,6 +182,34 @@ class _$UserDao extends UserDao {
   Future<void> deleteById(int id) async {
     await _queryAdapter
         .queryNoReturn('DELETE FROM users WHERE id = ?1', arguments: [id]);
+  }
+
+  @override
+  Future<int?> countUsers() async {
+    return _queryAdapter.query('SELECT COUNT(*) FROM users',
+        mapper: (Map<String, Object?> row) => row.values.first as int);
+  }
+
+  @override
+  Future<List<UserWithCount>> getUsersWithAddressCount() async {
+    return _queryAdapter.queryList('SELECT * FROM user_with_count',
+        mapper: (Map<String, Object?> row) => UserWithCount(
+            row['id'] as int,
+            row['firstName'] as String,
+            row['lastName'] as String,
+            row['addressCount'] as int));
+  }
+
+  @override
+  Future<List<AddressModel>> getAddressesForUser(int userId) async {
+    return _queryAdapter.queryList('SELECT * FROM addresses WHERE userId = ?1',
+        mapper: (Map<String, Object?> row) => AddressModel(
+            id: row['id'] as int?,
+            userId: row['userId'] as int,
+            street: row['street'] as String,
+            city: row['city'] as String,
+            country: row['country'] as String),
+        arguments: [userId]);
   }
 
   @override
