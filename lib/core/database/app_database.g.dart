@@ -284,6 +284,12 @@ class _$AddressDao extends AddressDao {
   }
 
   @override
+  Future<void> deleteAddressById(int id) async {
+    await _queryAdapter
+        .queryNoReturn('DELETE FROM addresses WHERE id = ?1', arguments: [id]);
+  }
+
+  @override
   Future<int> insertAddress(AddressModel address) {
     return _addressModelInsertionAdapter.insertAndReturnId(
         address, OnConflictStrategy.abort);
