@@ -49,10 +49,10 @@ flutter run
 
 ## 🧩 Pantallazos
 
-![Screenshot1](assets/screenshots/s1.png)
+![Screenshot1](https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s1.png)
 
-![Screenshot2](assets/screenshots/s2.png)
+![Screenshot2](https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s1.png)
 
-![Screenshot3](assets/screenshots/s3.png)
+![Screenshot3](https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s3.png)
 
-![Screenshot4](assets/screenshots/s4.png)
+![Screenshot4](https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s4.png)
