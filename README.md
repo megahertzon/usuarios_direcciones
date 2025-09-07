@@ -38,23 +38,19 @@ Aplicación Flutter para gestionar usuarios y sus direcciones de forma local, si
 
 ## 🛠️ Instalación y ejecución
 
-![Screenshot1](https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s1.png)
-
 ### 1. Instalar dependencias
 ```bash
 flutter pub get
 flutter pub run build_runner build --delete-conflicting-outputs
 
 flutter run
-
----
-
+```
 ## 🧩 Pantallazos
 
+<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s1.png" width="400"/>
 
+<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s2.png" width="400"/>
 
-![Screenshot2](https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s1.png)
+<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s3.png" width="400"/>
 
-![Screenshot3](https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s3.png)
-
-![Screenshot4](https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s4.png)
+<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s4.png" width="400"/>
