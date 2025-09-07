@@ -213,6 +213,16 @@ class _$UserDao extends UserDao {
   }
 
   @override
+  Future<List<UserWithCount>> getUsersWithCountView() async {
+    return _queryAdapter.queryList('SELECT * FROM user_with_count',
+        mapper: (Map<String, Object?> row) => UserWithCount(
+            row['id'] as int,
+            row['firstName'] as String,
+            row['lastName'] as String,
+            row['addressCount'] as int));
+  }
+
+  @override
   Future<int> insertUser(UserModel user) {
     return _userModelInsertionAdapter.insertAndReturnId(
         user, OnConflictStrategy.abort);

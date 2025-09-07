@@ -29,4 +29,7 @@ abstract class UserDao {
 
   @Query('SELECT * FROM addresses WHERE userId = :userId')
   Future<List<AddressModel>> getAddressesForUser(int userId);
+
+  @Query('SELECT * FROM user_with_count')
+  Future<List<UserWithCount>> getUsersWithCountView();
 }
