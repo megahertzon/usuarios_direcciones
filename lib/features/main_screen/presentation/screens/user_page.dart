@@ -82,7 +82,7 @@ class _UsersScaffoldState extends State<_UsersScaffold> {
                           },
                           onDelete: () async {
                             final id = state.summaries[i].id;
-                            final ok = await _confirmDelete(context);
+                            final ok = await _confirmDelete(context, id);
                             if (ok == true) {
                               //await context.read<UsersCubit>().delete(id);
                               await context.read<UsersCubit>().loadSummaries();
@@ -118,7 +118,7 @@ class _UsersScaffoldState extends State<_UsersScaffold> {
     );
   }
 
-  Future<bool?> _confirmDelete(BuildContext context) {
+  Future<bool?> _confirmDelete(BuildContext context, int id) {
     return showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
@@ -130,7 +130,10 @@ class _UsersScaffoldState extends State<_UsersScaffold> {
             child: const Text('Cancelar'),
           ),
           FilledButton(
-            onPressed: () => Navigator.pop(context, true),
+            onPressed: () {
+              context.read<UsersCubit>().delete(id);
+              Navigator.pop(context, true);
+            },
             child: const Text('Eliminar'),
           ),
         ],
