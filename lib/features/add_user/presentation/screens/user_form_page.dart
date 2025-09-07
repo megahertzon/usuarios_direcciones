@@ -4,9 +4,11 @@ import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/us
 import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/users_state.dart';
 import 'package:usuarios_direcciones/features/shared/domain/entities/address.dart';
 import 'package:usuarios_direcciones/features/shared/domain/entities/user.dart';
+import 'package:country_picker/country_picker.dart';
 
 class UserFormPage extends StatefulWidget {
-  const UserFormPage({super.key});
+  final User? userToEdit;
+  const UserFormPage({super.key, this.userToEdit});
 
   @override
   State<UserFormPage> createState() => _UserFormPageState();
@@ -19,7 +21,28 @@ class _UserFormPageState extends State<UserFormPage> {
   final _lastNameCtrl = TextEditingController();
   DateTime? birthDate;
 
-  final List<_AddressControllers> _addresses = [_AddressControllers()];
+  late List<_AddressControllers> _addresses;
+  @override
+  void initState() {
+    super.initState();
+    if (widget.userToEdit != null) {
+      final user = widget.userToEdit!;
+      _addresses = user.addresses.isNotEmpty
+          ? user.addresses.map((addr) {
+              final ctrls = _AddressControllers();
+              ctrls.street.text = addr.street;
+              ctrls.city.text = addr.city;
+              ctrls.country.text = addr.country;
+              return ctrls;
+            }).toList()
+          : [_AddressControllers()];
+      _firstNameCtrl.text = user.firstName;
+      _lastNameCtrl.text = user.lastName;
+      birthDate = user.birthDate;
+    } else {
+      _addresses = [_AddressControllers()];
+    }
+  }
 
   @override
   void dispose() {
@@ -33,7 +56,7 @@ class _UserFormPageState extends State<UserFormPage> {
 
   Future<void> _pickBirthDate() async {
     final now = DateTime.now();
-  final initial = birthDate ?? DateTime(now.year - 25, 1, 1);
+    final initial = birthDate ?? DateTime(now.year - 25, 1, 1);
     final picked = await showDatePicker(
       context: context,
       initialDate: initial,
@@ -43,12 +66,14 @@ class _UserFormPageState extends State<UserFormPage> {
     );
     if (!mounted) return;
     if (picked != null) {
-  setState(() => birthDate = picked);
+      setState(() => birthDate = picked);
     }
   }
 
   void _addAddressRow() {
-    setState(() => _addresses.add(_AddressControllers()));
+    setState(() {
+      _addresses.add(_AddressControllers());
+    });
   }
 
   void _removeAddressRow(int index) {
@@ -60,7 +85,7 @@ class _UserFormPageState extends State<UserFormPage> {
 
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
-  if (birthDate == null) {
+    if (birthDate == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Selecciona la fecha de nacimiento')),
       );
@@ -86,15 +111,19 @@ class _UserFormPageState extends State<UserFormPage> {
         .toList();
 
     final user = User(
-      id: null,
+      id: widget.userToEdit?.id,
       firstName: _firstNameCtrl.text.trim(),
       lastName: _lastNameCtrl.text.trim(),
-  birthDate: birthDate!,
+      birthDate: birthDate!,
       addresses: addrs,
     );
 
     final cubit = context.read<UsersCubit>();
-    await cubit.create(user);
+    if (widget.userToEdit != null) {
+      await cubit.update(user);
+    } else {
+      await cubit.create(user);
+    }
     if (!mounted) return;
     if (cubit.state.error == null) {
       Navigator.of(context).pop(true); // devuelve true para refrescar lista
@@ -103,8 +132,7 @@ class _UserFormPageState extends State<UserFormPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Si no inyectaste el cubit arriba, puedes hacerlo aquí:
-    // return BlocProvider(create: (_) => GetIt.I<UsersCubit>(), child: ...);
+
 
     return BlocListener<UsersCubit, UsersState>(
       listenWhen: (p, c) => p.error != c.error && c.error != null,
@@ -162,9 +190,9 @@ class _UserFormPageState extends State<UserFormPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-              birthDate == null
-                ? 'Selecciona una fecha'
-                : '${birthDate!.year}-${birthDate!.month.toString().padLeft(2, '0')}-${birthDate!.day.toString().padLeft(2, '0')}',
+                          birthDate == null
+                              ? 'Selecciona una fecha'
+                              : '${birthDate!.year}-${birthDate!.month.toString().padLeft(2, '0')}-${birthDate!.day.toString().padLeft(2, '0')}',
                         ),
                         const Icon(Icons.calendar_today),
                       ],
@@ -196,7 +224,7 @@ class _UserFormPageState extends State<UserFormPage> {
                   final index = entry.$1;
                   final item = entry.$2;
                   return _AddressCard(
-                    key: ValueKey(item),
+                    key: ValueKey('address_$index'),
                     index: index,
                     ctrls: item,
                     onRemove: () => _removeAddressRow(index),
@@ -311,11 +339,22 @@ class _AddressCard extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     controller: ctrls.country,
+                    readOnly: true,
                     decoration: const InputDecoration(
                       labelText: 'País',
                       hintText: 'Ej: Colombia',
                       border: OutlineInputBorder(),
+                      suffixIcon: Icon(Icons.arrow_drop_down),
                     ),
+                    onTap: () {
+                      showCountryPicker(
+                        context: context,
+                        showPhoneCode: false,
+                        onSelect: (country) {
+                          ctrls.country.text = country.name;
+                        },
+                      );
+                    },
                   ),
                 ),
               ],

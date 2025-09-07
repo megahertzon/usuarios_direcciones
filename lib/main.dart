@@ -1,9 +1,9 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:usuarios_direcciones/core/di/sl.dart';
 import 'package:usuarios_direcciones/features/add_user/presentation/screens/user_form_page.dart';
-import 'package:usuarios_direcciones/features/edit_user/presentation/pages/user_edit_page.dart';
 import 'package:usuarios_direcciones/features/users_screen/presentation/screens/user_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +26,7 @@ final GoRouter _router = GoRouter(
       name: 'edit_user',
       builder: (context, state) => BlocProvider(
         create: (_) => GetIt.I<UsersCubit>(),
-        child: UserEditPage(user: state.extra as User),
+        child: UserFormPage(userToEdit: state.extra as User),
       ),
     ),
   ],
@@ -40,6 +40,7 @@ Future<void> main() async {
       routerConfig: _router,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
+        CountryLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
