@@ -19,6 +19,7 @@ mixin _$UsersState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   List<UserSummary> get summaries => throw _privateConstructorUsedError;
+  User? get userSelected => throw _privateConstructorUsedError;
 
   /// Create a copy of UsersState
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +34,13 @@ abstract class $UsersStateCopyWith<$Res> {
           UsersState value, $Res Function(UsersState) then) =
       _$UsersStateCopyWithImpl<$Res, UsersState>;
   @useResult
-  $Res call({bool isLoading, String? error, List<UserSummary> summaries});
+  $Res call(
+      {bool isLoading,
+      String? error,
+      List<UserSummary> summaries,
+      User? userSelected});
+
+  $UserCopyWith<$Res>? get userSelected;
 }
 
 /// @nodoc
@@ -54,6 +61,7 @@ class _$UsersStateCopyWithImpl<$Res, $Val extends UsersState>
     Object? isLoading = null,
     Object? error = freezed,
     Object? summaries = null,
+    Object? userSelected = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -68,7 +76,25 @@ class _$UsersStateCopyWithImpl<$Res, $Val extends UsersState>
           ? _value.summaries
           : summaries // ignore: cast_nullable_to_non_nullable
               as List<UserSummary>,
+      userSelected: freezed == userSelected
+          ? _value.userSelected
+          : userSelected // ignore: cast_nullable_to_non_nullable
+              as User?,
     ) as $Val);
+  }
+
+  /// Create a copy of UsersState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get userSelected {
+    if (_value.userSelected == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.userSelected!, (value) {
+      return _then(_value.copyWith(userSelected: value) as $Val);
+    });
   }
 }
 
@@ -80,7 +106,14 @@ abstract class _$$UsersStateImplCopyWith<$Res>
       __$$UsersStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? error, List<UserSummary> summaries});
+  $Res call(
+      {bool isLoading,
+      String? error,
+      List<UserSummary> summaries,
+      User? userSelected});
+
+  @override
+  $UserCopyWith<$Res>? get userSelected;
 }
 
 /// @nodoc
@@ -99,6 +132,7 @@ class __$$UsersStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
     Object? summaries = null,
+    Object? userSelected = freezed,
   }) {
     return _then(_$UsersStateImpl(
       isLoading: null == isLoading
@@ -113,6 +147,10 @@ class __$$UsersStateImplCopyWithImpl<$Res>
           ? _value._summaries
           : summaries // ignore: cast_nullable_to_non_nullable
               as List<UserSummary>,
+      userSelected: freezed == userSelected
+          ? _value.userSelected
+          : userSelected // ignore: cast_nullable_to_non_nullable
+              as User?,
     ));
   }
 }
@@ -123,7 +161,8 @@ class _$UsersStateImpl implements _UsersState {
   const _$UsersStateImpl(
       {this.isLoading = false,
       this.error,
-      final List<UserSummary> summaries = const <UserSummary>[]})
+      final List<UserSummary> summaries = const <UserSummary>[],
+      this.userSelected})
       : _summaries = summaries;
 
   @override
@@ -141,8 +180,11 @@ class _$UsersStateImpl implements _UsersState {
   }
 
   @override
+  final User? userSelected;
+
+  @override
   String toString() {
-    return 'UsersState(isLoading: $isLoading, error: $error, summaries: $summaries)';
+    return 'UsersState(isLoading: $isLoading, error: $error, summaries: $summaries, userSelected: $userSelected)';
   }
 
   @override
@@ -154,12 +196,14 @@ class _$UsersStateImpl implements _UsersState {
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality()
-                .equals(other._summaries, _summaries));
+                .equals(other._summaries, _summaries) &&
+            (identical(other.userSelected, userSelected) ||
+                other.userSelected == userSelected));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, error,
-      const DeepCollectionEquality().hash(_summaries));
+      const DeepCollectionEquality().hash(_summaries), userSelected);
 
   /// Create a copy of UsersState
   /// with the given fields replaced by the non-null parameter values.
@@ -174,7 +218,8 @@ abstract class _UsersState implements UsersState {
   const factory _UsersState(
       {final bool isLoading,
       final String? error,
-      final List<UserSummary> summaries}) = _$UsersStateImpl;
+      final List<UserSummary> summaries,
+      final User? userSelected}) = _$UsersStateImpl;
 
   @override
   bool get isLoading;
@@ -182,6 +227,8 @@ abstract class _UsersState implements UsersState {
   String? get error;
   @override
   List<UserSummary> get summaries;
+  @override
+  User? get userSelected;
 
   /// Create a copy of UsersState
   /// with the given fields replaced by the non-null parameter values.

@@ -223,6 +223,12 @@ class _$UserDao extends UserDao {
   }
 
   @override
+  Future<void> deleteAddressesForUser(int userId) async {
+    await _queryAdapter.queryNoReturn('DELETE FROM addresses WHERE userId = ?1',
+        arguments: [userId]);
+  }
+
+  @override
   Future<int> insertUser(UserModel user) {
     return _userModelInsertionAdapter.insertAndReturnId(
         user, OnConflictStrategy.abort);

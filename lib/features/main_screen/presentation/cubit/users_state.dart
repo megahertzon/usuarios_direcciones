@@ -10,5 +10,6 @@ class UsersState with _$UsersState {
     @Default(false) bool isLoading,
     String? error,
     @Default(<UserSummary>[]) List<UserSummary> summaries,
+    User? userSelected,
   }) = _UsersState;
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:usuarios_direcciones/features/main_screen/domain/entities/user_summary.dart';
 import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_cubit.dart';
 import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_state.dart';
 import 'package:usuarios_direcciones/features/main_screen/presentation/widgets/user_tile.dart';
@@ -77,8 +78,7 @@ class _UsersScaffoldState extends State<_UsersScaffold> {
                         UserTile(
                           summary: state.summaries[i],
                           onEdit: () {
-                            // TODO: navegar a formulario de edición
-                            // context.push('/users/${state.summaries[i].id}/edit');
+                            _onEditPressed(context, state.summaries[i]);
                           },
                           onDelete: () async {
                             final id = state.summaries[i].id;
@@ -116,6 +116,46 @@ class _UsersScaffoldState extends State<_UsersScaffold> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  Future<void> _onEditPressed(BuildContext context, UserSummary summary) async {
+    final cubit = context.read<UsersCubit>();
+
+    // 1) Loader modal
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const Center(child: CircularProgressIndicator()),
+    );
+
+    // 2) Cargar usuario completo
+    await cubit.loadById(summary.id);
+
+    // 3) Cerrar loader
+    if (context.mounted) Navigator.of(context).pop();
+
+    // 4) Error?
+    final err = cubit.state.error;
+    if (err != null) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(err), behavior: SnackBarBehavior.floating),
+        );
+      }
+      return;
+    }
+
+    // 5) Navegar a edición
+    final user = cubit.state.userSelected;
+    if (user == null) return;
+
+    if (context.mounted) {
+      final updated = await context.pushNamed('edit_user', extra: user);
+
+      if (updated == true && context.mounted) {
+        await cubit.loadSummaries();
+      }
+    }
   }
 
   Future<bool?> _confirmDelete(BuildContext context, int id) {

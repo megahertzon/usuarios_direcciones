@@ -97,9 +97,15 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, User>> getById(int id) {
-    // TODO: implement getById
-    throw UnimplementedError();
+  Future<Either<Failure, User>> getById(int id) async {
+    try {
+      final u = await _userDao.findById(id);
+      if (u == null) return Left(Failure.database('Usuario $id no existe'));
+      final addrs = await _userDao.getAddressesForUser(id);
+      return Right(_toEntity(u, addrs));
+    } catch (e) {
+      return Left(Failure.database(e.toString()));
+    }
   }
 
   @override
@@ -113,16 +119,25 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> update(User user) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> update(User user) async {
+    if (user.id == null) return Left(Failure.database('user.id es null'));
+    try {
+      await _userDao.updateUser(_toModel(user));
+
+      await _userDao.deleteAddressesForUser(user.id!);
+      for (final a in user.addresses) {
+        await _addressDao.insertAddress(_addrToModel(user.id!, a));
+      }
+      return const Right(unit);
+    } catch (e) {
+      return Left(Failure.database(e.toString()));
+    }
   }
 
   @override
   Future<Either<Failure, List<UserSummary>>> listSummaries() async {
     try {
-      final rows = await _userDao
-          .getUsersWithCountView(); // usando @DatabaseView
+      final rows = await _userDao.getUsersWithCountView();
       final list = rows
           .map(
             (r) => UserSummary(r.id, r.firstName, r.lastName, r.addressCount),

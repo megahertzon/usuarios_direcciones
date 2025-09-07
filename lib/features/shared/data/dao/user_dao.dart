@@ -1,4 +1,3 @@
-// ...existing code...
 import 'package:usuarios_direcciones/features/shared/data/models/address_model.dart';
 import 'package:usuarios_direcciones/features/shared/data/models/user_model.dart';
 import 'package:floor/floor.dart';
@@ -32,4 +31,7 @@ abstract class UserDao {
 
   @Query('SELECT * FROM user_with_count')
   Future<List<UserWithCount>> getUsersWithCountView();
+
+  @Query('DELETE FROM addresses WHERE userId = :userId')
+  Future<void> deleteAddressesForUser(int userId);
 }
