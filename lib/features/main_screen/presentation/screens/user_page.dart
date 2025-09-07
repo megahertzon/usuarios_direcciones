@@ -107,7 +107,11 @@ class _UsersScaffoldState extends State<_UsersScaffold> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          context.pushNamed('add_user');
+          final result = await context.pushNamed('add_user');
+          if (!mounted) return;
+          if (result == true) {
+            context.read<UsersCubit>().loadSummaries();
+          }
         },
         child: const Icon(Icons.add),
       ),

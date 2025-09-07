@@ -41,6 +41,7 @@ class _UserFormPageState extends State<UserFormPage> {
       lastDate: DateTime(now.year, now.month, now.day),
       locale: const Locale('es', 'CO'),
     );
+    if (!mounted) return;
     if (picked != null) {
       setState(() => _birthDate = picked);
     }
@@ -94,8 +95,8 @@ class _UserFormPageState extends State<UserFormPage> {
 
     final cubit = context.read<UsersCubit>();
     await cubit.create(user);
-
-    if (mounted && (cubit.state.error == null)) {
+    if (!mounted) return;
+    if (cubit.state.error == null) {
       Navigator.of(context).pop(true); // devuelve true para refrescar lista
     }
   }
