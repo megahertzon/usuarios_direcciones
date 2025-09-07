@@ -57,7 +57,11 @@ class _UsersScaffoldState extends State<_UsersScaffold> {
               child: ListView(
                 children: const [
                   SizedBox(height: 200),
-                  Center(child: Text('Sin usuarios')),
+                  Center(
+                    child: Text(
+                      'Sin usuarios, agrega uno dando clic en el botón +',
+                    ),
+                  ),
                 ],
               ),
             );
