@@ -38,6 +38,8 @@ Aplicación Flutter para gestionar usuarios y sus direcciones de forma local, si
 
 ## 🛠️ Instalación y ejecución
 
+![Screenshot1](https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s1.png)
+
 ### 1. Instalar dependencias
 ```bash
 flutter pub get
@@ -49,7 +51,7 @@ flutter run
 
 ## 🧩 Pantallazos
 
-![Screenshot1](https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s1.png)
+
 
 ![Screenshot2](https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s1.png)
 
