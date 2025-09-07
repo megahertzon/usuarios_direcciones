@@ -44,3 +44,15 @@ flutter pub get
 flutter pub run build_runner build --delete-conflicting-outputs
 
 flutter run
+
+---
+
+## 🧩 Pantallazos
+
+![Screenshot1](assets/screenshots/s1.png)
+
+![Screenshot2](assets/screenshots/s2.png)
+
+![Screenshot3](assets/screenshots/s3.png)
+
+![Screenshot4](assets/screenshots/s4.png)
