@@ -38,7 +38,6 @@ class _UsersScaffold extends StatefulWidget {
 }
 
 class _UsersScaffoldState extends State<_UsersScaffold> {
-  // Obtén el ValueNotifier desde arriba en el árbol
   ValueNotifier<ThemeMode>? get themeModeNotifier {
     final inherited = context
         .findAncestorWidgetOfExactType<InheritedThemeModeNotifier>();
