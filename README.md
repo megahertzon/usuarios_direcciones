@@ -44,15 +44,13 @@ flutter pub get
 flutter pub run build_runner build --delete-conflicting-outputs
 
 flutter run
-
----
-
+```
 ## 🧩 Pantallazos
 
-![Screenshot1](assets/screenshots/s1.png)
+<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s1.png" width="300"/>
 
-![Screenshot2](assets/screenshots/s2.png)
+<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s2.png" width="300"/>
 
-![Screenshot3](assets/screenshots/s3.png)
+<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s3.png" width="300"/>
 
-![Screenshot4](assets/screenshots/s4.png)
+<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s4.png" width="300"/>
