@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:usuarios_direcciones/features/main_screen/domain/entities/user_summary.dart';
-import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_cubit.dart';
-import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_state.dart';
-import 'package:usuarios_direcciones/features/main_screen/presentation/widgets/user_tile.dart';
+import 'package:usuarios_direcciones/features/users_screen/domain/entities/user_summary.dart';
+import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/users_cubit.dart';
+import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/users_state.dart';
+import 'package:usuarios_direcciones/features/users_screen/presentation/widgets/user_tile.dart';
 
 class UsersPage extends StatelessWidget {
   const UsersPage({super.key});

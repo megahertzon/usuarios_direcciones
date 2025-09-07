@@ -4,8 +4,8 @@ import 'package:usuarios_direcciones/features/add_user/application/use_cases/del
 import 'package:usuarios_direcciones/features/add_user/application/use_cases/create_users.dart';
 import 'package:usuarios_direcciones/features/edit_user/application/get_user_by_id.dart';
 import 'package:usuarios_direcciones/features/edit_user/application/update_user.dart';
-import 'package:usuarios_direcciones/features/main_screen/application/usecases/list_user_summaries.dart';
-import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_state.dart';
+import 'package:usuarios_direcciones/features/users_screen/application/usecases/list_user_summaries.dart';
+import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/users_state.dart';
 import 'package:usuarios_direcciones/features/shared/domain/entities/user.dart';
 
 class UsersCubit extends Cubit<UsersState> {

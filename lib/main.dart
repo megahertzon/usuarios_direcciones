@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:usuarios_direcciones/core/di/sl.dart';
 import 'package:usuarios_direcciones/features/add_user/presentation/screens/user_form_page.dart';
 import 'package:usuarios_direcciones/features/edit_user/presentation/pages/user_edit_page.dart';
-import 'package:usuarios_direcciones/features/main_screen/presentation/screens/user_page.dart';
+import 'package:usuarios_direcciones/features/users_screen/presentation/screens/user_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_cubit.dart';
+import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/users_cubit.dart';
 import 'package:usuarios_direcciones/features/shared/domain/entities/user.dart';
 
 final GoRouter _router = GoRouter(

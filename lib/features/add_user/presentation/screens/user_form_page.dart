@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_cubit.dart';
-import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_state.dart';
+import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/users_cubit.dart';
+import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/users_state.dart';
 import 'package:usuarios_direcciones/features/shared/domain/entities/address.dart';
 import 'package:usuarios_direcciones/features/shared/domain/entities/user.dart';
 
@@ -17,7 +17,7 @@ class _UserFormPageState extends State<UserFormPage> {
 
   final _firstNameCtrl = TextEditingController();
   final _lastNameCtrl = TextEditingController();
-  DateTime? _birthDate;
+  DateTime? birthDate;
 
   final List<_AddressControllers> _addresses = [_AddressControllers()];
 
@@ -33,7 +33,7 @@ class _UserFormPageState extends State<UserFormPage> {
 
   Future<void> _pickBirthDate() async {
     final now = DateTime.now();
-    final initial = _birthDate ?? DateTime(now.year - 25, 1, 1);
+  final initial = birthDate ?? DateTime(now.year - 25, 1, 1);
     final picked = await showDatePicker(
       context: context,
       initialDate: initial,
@@ -43,7 +43,7 @@ class _UserFormPageState extends State<UserFormPage> {
     );
     if (!mounted) return;
     if (picked != null) {
-      setState(() => _birthDate = picked);
+  setState(() => birthDate = picked);
     }
   }
 
@@ -60,7 +60,7 @@ class _UserFormPageState extends State<UserFormPage> {
 
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
-    if (_birthDate == null) {
+  if (birthDate == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Selecciona la fecha de nacimiento')),
       );
@@ -89,7 +89,7 @@ class _UserFormPageState extends State<UserFormPage> {
       id: null,
       firstName: _firstNameCtrl.text.trim(),
       lastName: _lastNameCtrl.text.trim(),
-      birthDate: _birthDate!,
+  birthDate: birthDate!,
       addresses: addrs,
     );
 
@@ -162,9 +162,9 @@ class _UserFormPageState extends State<UserFormPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          _birthDate == null
-                              ? 'Selecciona una fecha'
-                              : '${_birthDate!.year}-${_birthDate!.month.toString().padLeft(2, '0')}-${_birthDate!.day.toString().padLeft(2, '0')}',
+              birthDate == null
+                ? 'Selecciona una fecha'
+                : '${birthDate!.year}-${birthDate!.month.toString().padLeft(2, '0')}-${birthDate!.day.toString().padLeft(2, '0')}',
                         ),
                         const Icon(Icons.calendar_today),
                       ],

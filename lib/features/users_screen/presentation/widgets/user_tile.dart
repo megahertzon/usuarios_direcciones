@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:usuarios_direcciones/features/main_screen/domain/entities/user_summary.dart';
+import 'package:usuarios_direcciones/features/users_screen/domain/entities/user_summary.dart';
 
 class UserTile extends StatelessWidget {
   final UserSummary summary;

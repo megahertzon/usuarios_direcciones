@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:usuarios_direcciones/features/edit_user/presentation/widgets/address_card.dart';
 import 'package:usuarios_direcciones/features/edit_user/presentation/widgets/address_row.dart';
-import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_cubit.dart';
-import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_state.dart';
+import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/users_cubit.dart';
+import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/users_state.dart';
 import 'package:usuarios_direcciones/features/shared/domain/entities/address.dart';
 import 'package:usuarios_direcciones/features/shared/domain/entities/user.dart';
 
