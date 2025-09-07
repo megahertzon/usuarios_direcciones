@@ -2,7 +2,7 @@
 
 
 import 'package:floor/floor.dart';
-import 'package:usuarios_direcciones/features/shared/domain/data/models/address_model.dart';
+import 'package:usuarios_direcciones/features/shared/data/models/address_model.dart';
 
 @dao
 abstract class AddressDao {
