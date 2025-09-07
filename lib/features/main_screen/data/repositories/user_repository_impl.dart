@@ -87,13 +87,9 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> delete(int id) async {
-    try {
-      _userDao.deleteById(id);
-      return const Right(unit);
-    } catch (e) {
-      return Left(Failure.database(e.toString()));
-    }
+  Future<Either<Failure, Unit>> delete(int id) {
+    // TODO: implement delete
+    throw UnimplementedError();
   }
 
   @override
@@ -111,6 +107,7 @@ class UserRepositoryImpl implements UserRepository {
       return Left(Failure.database(e.toString()));
     }
   }
+
 
   @override
   Future<Either<Failure, Unit>> update(User user) {
