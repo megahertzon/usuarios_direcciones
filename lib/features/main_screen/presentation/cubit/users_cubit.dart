@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:usuarios_direcciones/core/error/failures.dart';
+import 'package:usuarios_direcciones/features/add_user/application/use_cases/delete_user.dart';
 import 'package:usuarios_direcciones/features/main_screen/application/usecases/create_users.dart';
 import 'package:usuarios_direcciones/features/main_screen/application/usecases/list_user_summaries.dart';
 import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_state.dart';
@@ -8,12 +9,15 @@ import 'package:usuarios_direcciones/features/shared/domain/entities/user.dart';
 class UsersCubit extends Cubit<UsersState> {
   final ListUserSummaries _listSummaries;
   final CreateUser _createUser;
+  final DeleteUser _deleteUser;
 
   UsersCubit({
     required ListUserSummaries listSummaries,
     required CreateUser createUser,
+    required DeleteUser deleteUser,
   }) : _listSummaries = listSummaries,
        _createUser = createUser,
+       _deleteUser = deleteUser,
        super(const UsersState());
 
   Future<void> loadSummaries() async {
@@ -34,6 +38,15 @@ class UsersCubit extends Cubit<UsersState> {
       // refresca la lista resumida por defecto
       await loadSummaries();
     });
+  }
+
+  Future<void> delete(int id) async {
+    emit(state.copyWith(isLoading: true, error: null));
+    final res = await _deleteUser(id);
+    res.fold(
+      (f) => emit(state.copyWith(isLoading: false, error: _msg(f))),
+      (_) async => await loadSummaries(),
+    );
   }
 
   String _msg(Failure f) => f.when(
