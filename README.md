@@ -47,10 +47,10 @@ flutter run
 ```
 ## 🧩 Pantallazos
 
-<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s1.png" width="400"/>
+<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s1.png" width="200"/>
 
-<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s2.png" width="400"/>
+<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s2.png" width="200"/>
 
-<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s3.png" width="400"/>
+<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s3.png" width="200"/>
 
-<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s4.png" width="400"/>
+<img src="https://raw.githubusercontent.com/megahertzon/usuarios_direcciones/e854b35a40fddbdbbb977fb3a243a0bdc7154379/assets/screenshots/s4.png" width="200"/>
