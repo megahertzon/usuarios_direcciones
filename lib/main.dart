@@ -9,7 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/users_cubit.dart';
 import 'package:usuarios_direcciones/features/shared/domain/entities/user.dart';
-import 'package:usuarios_direcciones/inherited_theme_mode_notifier.dart';
+import 'package:usuarios_direcciones/core/widgets/inherited_theme_mode_notifier.dart';
 
 final GoRouter _router = GoRouter(
   routes: [

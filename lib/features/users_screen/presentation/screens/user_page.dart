@@ -6,7 +6,7 @@ import 'package:usuarios_direcciones/features/users_screen/domain/entities/user_
 import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/users_cubit.dart';
 import 'package:usuarios_direcciones/features/users_screen/presentation/cubit/users_state.dart';
 import 'package:usuarios_direcciones/features/users_screen/presentation/widgets/user_tile.dart';
-import 'package:usuarios_direcciones/inherited_theme_mode_notifier.dart';
+import 'package:usuarios_direcciones/core/widgets/inherited_theme_mode_notifier.dart';
 
 class UsersPage extends StatelessWidget {
   const UsersPage({super.key});
