@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
-import 'package:usuarios_direcciones/features/core/database/app_database.dart';
+import 'package:usuarios_direcciones/core/database/app_database.dart';
 import 'package:usuarios_direcciones/features/main_screen/application/usecases/create_users.dart';
 import 'package:usuarios_direcciones/features/main_screen/application/usecases/get_users.dart';
 import 'package:usuarios_direcciones/features/main_screen/application/usecases/list_user_summaries.dart';
@@ -78,5 +78,5 @@ Future<void> serviceLocatorInit() async {
   sl.registerFactory(() => CreateUser(sl()));
 
   // ---------------- Cubit ----------------
-  sl.registerFactory(() => UsersCubit(listSummaries: sl()));
+  sl.registerFactory(() => UsersCubit(listSummaries: sl(), createUser: sl()));
 }

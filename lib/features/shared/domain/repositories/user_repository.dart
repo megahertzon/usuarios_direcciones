@@ -2,7 +2,7 @@
 
 
 import 'package:dartz/dartz.dart';
-import 'package:usuarios_direcciones/features/core/error/failures.dart';
+import 'package:usuarios_direcciones/core/error/failures.dart';
 import 'package:usuarios_direcciones/features/main_screen/domain/entities/user_summary.dart';
 import 'package:usuarios_direcciones/features/shared/domain/entities/address.dart';
 import 'package:usuarios_direcciones/features/shared/domain/entities/user.dart';

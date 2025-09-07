@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_cubit.dart';
 import 'package:usuarios_direcciones/features/main_screen/presentation/cubit/users_state.dart';
 import 'package:usuarios_direcciones/features/main_screen/presentation/widgets/user_tile.dart';
@@ -43,10 +44,7 @@ class _UsersScaffoldState extends State<_UsersScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F7),
-      appBar: AppBar(
-        title: const Text('Usuarios'),
-        elevation: 0,
-      ),
+      appBar: AppBar(title: const Text('Usuarios'), elevation: 0),
       body: BlocBuilder<UsersCubit, UsersState>(
         builder: (context, state) {
           if (state.isLoading && state.summaries.isEmpty) {
@@ -109,13 +107,11 @@ class _UsersScaffoldState extends State<_UsersScaffold> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          // TODO: navegar a formulario de creación
-          // final created = await context.push('/users/create');
-          // if (created == true) context.read<UsersCubit>().loadSummaries();
-
-          // DEMO: crear un usuario rápido (si tu cubit lo soporta)
-          // await context.read<UsersCubit>().create(User(...));
-          // await context.read<UsersCubit>().loadSummaries();
+          final result = await context.pushNamed('add_user');
+          if (!mounted) return;
+          if (result == true) {
+            context.read<UsersCubit>().loadSummaries();
+          }
         },
         child: const Icon(Icons.add),
       ),
@@ -129,8 +125,14 @@ class _UsersScaffoldState extends State<_UsersScaffold> {
         title: const Text('Eliminar usuario'),
         content: const Text('¿Estás seguro de eliminar este usuario?'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancelar')),
-          FilledButton(onPressed: () => Navigator.pop(context, true), child: const Text('Eliminar')),
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancelar'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Eliminar'),
+          ),
         ],
       ),
     );

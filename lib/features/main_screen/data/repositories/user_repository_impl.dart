@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:usuarios_direcciones/features/core/error/exceptions.dart';
-import 'package:usuarios_direcciones/features/core/error/failures.dart';
+import 'package:usuarios_direcciones/core/error/failures.dart';
 import 'package:usuarios_direcciones/features/main_screen/domain/entities/user_summary.dart';
 import 'package:usuarios_direcciones/features/shared/data/dao/address_dao.dart';
 import 'package:usuarios_direcciones/features/shared/data/dao/user_dao.dart';
@@ -34,6 +33,21 @@ class UserRepositoryImpl implements UserRepository {
         .toList(),
   );
 
+  UserModel _toModel(User u) => UserModel(
+    id: u.id,
+    firstName: u.firstName,
+    lastName: u.lastName,
+    birthDate: u.birthDate.millisecondsSinceEpoch,
+  );
+
+  AddressModel _addrToModel(int userId, Address a) => AddressModel(
+    id: a.id,
+    userId: userId,
+    street: a.street,
+    city: a.city,
+    country: a.country,
+  );
+
   @override
   Future<Either<Failure, List<User>>> getAll() async {
     try {
@@ -50,15 +64,26 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, int>> addAddress(int userId, Address address) {
-    // TODO: implement addAddress
-    throw UnimplementedError();
+  Future<Either<Failure, int>> addAddress(int userId, Address address) async {
+    try {
+      final id = await _addressDao.insertAddress(_addrToModel(userId, address));
+      return Right(id);
+    } catch (e) {
+      return Left(Failure.database(e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, int>> create(User user) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<Either<Failure, int>> create(User user) async {
+    try {
+      final userId = await _userDao.insertUser(_toModel(user));
+      for (final a in user.addresses) {
+        await _addressDao.insertAddress(_addrToModel(userId, a));
+      }
+      return Right(userId);
+    } catch (e) {
+      return Left(Failure.database(e.toString()));
+    }
   }
 
   @override
@@ -74,10 +99,15 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> removeAddress(int addressId) {
-    // TODO: implement removeAddress
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> removeAddress(int addressId) async {
+    try {
+      await _addressDao.deleteAddressById(addressId);
+      return const Right(unit);
+    } catch (e) {
+      return Left(Failure.database(e.toString()));
+    }
   }
+
 
   @override
   Future<Either<Failure, Unit>> update(User user) {

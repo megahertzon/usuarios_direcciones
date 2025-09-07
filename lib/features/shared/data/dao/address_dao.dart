@@ -14,4 +14,7 @@ abstract class AddressDao {
 
   @delete
   Future<void> deleteAddress(AddressModel address);
+
+  @Query('DELETE FROM addresses WHERE id = :id')
+  Future<void> deleteAddressById(int id);
 }
